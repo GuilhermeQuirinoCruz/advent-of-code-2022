@@ -36,6 +36,8 @@ for dado in dados_sensores.split("\n"):
     if posicao_sinalizador[1] == 2000000:
         x_sinalizadores_linha_2kk.add(posicao_sinalizador[0])
 
+# Solução inviável
+# ---------------------------------------------------------------------------------------
 posicoes_sem_sinalizador = {}
 
 def incluir_posicao_sem_sinalizador(posicao):
@@ -59,6 +61,7 @@ def incluir_posicoes_sem_sinalizador(sensor):
         
         qtd += 2
         add_y -= 1
+# ---------------------------------------------------------------------------------------
 
 # PARTE 1
 linha_2kk = set()
@@ -72,14 +75,12 @@ def linha_2_milhoes(sensor):
 
     x = sensor.posicao[0] - (qtd_linha // 2)
     for i in range(qtd_linha):
-        if x + i not in x_sinalizadores_linha_2kk:
-            linha_2kk.add(x + i)
+        linha_2kk.add(x + i)
 
-# for sensor in sensores:
-#     linha_2_milhoes(sensor)
-    # incluir_posicoes_sem_sinalizador(sensor)
+for sensor in sensores:
+    linha_2_milhoes(sensor)
 
-# print(len(linha_2kk))
+print(len(linha_2kk) - len(x_sinalizadores_linha_2kk))
 
 # PARTE 2
 sensores.sort(key = lambda s:s.distancia_sinalizador, reverse=True)
@@ -96,20 +97,20 @@ def proximo_x_verificar(posicao, sensor):
 
 posicao_sinalizador_alvo = [0, 0]
 posicao_encontrada = False
-while posicao_sinalizador_alvo[1] <= 4000001 and not posicao_encontrada:
-    posicao_sinalizador_alvo[0] = 0
-    while posicao_sinalizador_alvo[0] <= 4000001 and not posicao_encontrada:
-        posicao_encontrada = True
-        for sensor in sensores:
-            if posicao_dentro_do_alcance(posicao_sinalizador_alvo, sensor):
-                posicao_sinalizador_alvo[0] = proximo_x_verificar(posicao_sinalizador_alvo, sensor)
-                posicao_encontrada = False
-                break
+# while posicao_sinalizador_alvo[1] <= 4000001 and not posicao_encontrada:
+#     posicao_sinalizador_alvo[0] = 0
+#     while posicao_sinalizador_alvo[0] <= 4000001 and not posicao_encontrada:
+#         posicao_encontrada = True
+#         for sensor in sensores:
+#             if posicao_dentro_do_alcance(posicao_sinalizador_alvo, sensor):
+#                 posicao_sinalizador_alvo[0] = proximo_x_verificar(posicao_sinalizador_alvo, sensor)
+#                 posicao_encontrada = False
+#                 break
     
-    if not posicao_encontrada:
-        posicao_sinalizador_alvo[1] += 1
+#     if not posicao_encontrada:
+#         posicao_sinalizador_alvo[1] += 1
 
-print(posicao_sinalizador_alvo)
+# print(posicao_sinalizador_alvo)
 
-frequencia_ajuste = (posicao_sinalizador_alvo[0] * 4000000) + posicao_sinalizador_alvo[1]
-print(frequencia_ajuste)
+# frequencia_ajuste = (posicao_sinalizador_alvo[0] * 4000000) + posicao_sinalizador_alvo[1]
+# print(frequencia_ajuste)
